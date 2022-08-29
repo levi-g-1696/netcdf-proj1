@@ -4,7 +4,7 @@ import numpy as np
 
 import pandas as pd
 
-from get_index_by_location import get_index_by_location
+from get_index_by_location import get_index_by_location, getXYset
 
 dt = datetime.now()
 
@@ -24,12 +24,14 @@ wind_dir = np.array(nc.variables['wind_dir'][:])
 ws= np.array(nc.variables['wind_speed'][:])
 print ("wind dir =",wind_dir[0,1]," ; wind speed = " ,ws[0,6])
 ts2=datetime.timestamp(datetime.now())
-res= get_index_by_location(281.1,-233.8, lat,lon)
-print( res)
+res= get_index_by_location(4.165,192.03, lat,lon)
+print( "+++",res)
+ts3=datetime.timestamp(datetime.now())
 
 #
 #print (wind_dir)
 print (" alapsed time =",ts2-ts1 )
+print (" alapsed time2 =",ts3-ts2 )
 # a pandas.Series designed for time series of a 2D lat,lon grid
 #wind_ts = pd.Series(wind_dir, index=dtime)
 

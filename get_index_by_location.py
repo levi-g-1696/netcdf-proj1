@@ -13,17 +13,39 @@
 #                return result_tuple
 import numpy as np
 def get_index_by_location (input_lat , input_lon, lat_arr,lon_arr):
-    not_exist= (-1,-1)
-    nplat = np.array(lat_arr)
-    nplon = np.array(lon_arr)
-    minLat= nplat.min()
-    maxLat=nplon.max()
+    notExist= (-1,-1)
+    npLat = np.array(lat_arr)
+    npLon = np.array(lon_arr)
+    minLat= npLat.min()
+    maxLat=npLon.max()
     if minLat > input_lat or input_lat >= maxLat:
-        return not_exist
-    minLon = nplon.min()
-    maxLon = nplon.max()
+        return notExist
+    minLon = npLon.min()
+    maxLon = npLon.max()
     if minLon > input_lon or input_lon >= maxLon:
-        return not_exist
+        return notExist
+    setLat= getXYset(npLat,input_lat)
+    print (setLat)
+    setLon = getXYset(npLon, input_lon)
+    print (setLon)
+    setResult= setLat & setLon
+    result= notExist
+    if len(setResult)>0:
+      result= setResult.pop();
+    return (result)
+
+
+def getXYset(values,myvalue):
+    xySet= set()
+    for i in range (len(values)):
+       # for j in range (len(values[i]-2)):
+        for j in range(81):
+            if values[i,j] <= myvalue <= values[i,j+1]:
+            # if values[i, j] == myvalue :
+                xySet.add((j,i))
+    return xySet
+
+
 
 
     
