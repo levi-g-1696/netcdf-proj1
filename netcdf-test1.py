@@ -22,7 +22,7 @@ time_var = nc.variables['time']
 dtime = netCDF4.num2date(time_var[:],time_var.units)
 wind_dir = np.array(nc.variables['wind_dir'][:])
 ws= np.array(nc.variables['wind_speed'][:])
-print ("wind dir =",wind_dir[0,1]," ; wind speed = " ,ws[0,6])
+print ("wind dir =",wind_dir[0,1],"  ; wind speed = " ,ws[0,6])
 ts2=datetime.timestamp(datetime.now())
 res= get_index_by_location(4.165,192.03, lat,lon)
 print( "+++",res)
