@@ -25,9 +25,13 @@ def get_index_by_location (input_lat , input_lon, lat_arr,lon_arr):
     if minLon > input_lon or input_lon >= maxLon:
         return notExist
     setLat= getXYset(npLat,input_lat)
-    print (setLat)
+    for elem in setLat:
+        if 8 < elem[0] < 11 : print (elem)
+
     setLon = getXYset(npLon, input_lon)
-    print (setLon)
+    print ("===lon  ===")
+    for elem in setLon:
+      if 8 < elem[1] < 11: print(elem)
     setResult= setLat & setLon
     result= notExist
     if len(setResult)>0:
@@ -39,10 +43,11 @@ def getXYset(values,myvalue):
     xySet= set()
     for i in range (len(values)):
        # for j in range (len(values[i]-2)):
-        for j in range(81):
+        for j in range(81
+                       ):
             if values[i,j] <= myvalue <= values[i,j+1]:
             # if values[i, j] == myvalue :
-                xySet.add((j,i))
+                xySet.add((i,j))
     return xySet
 
 
