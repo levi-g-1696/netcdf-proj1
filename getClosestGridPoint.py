@@ -7,25 +7,30 @@ def getClosestGridPoint(lat,lon, netcdfDataset,latmin,lonmin,latMax,lonMax):
     lonArr = nc.variables['lon'][:]
     pointA= (0,0)
     pointB= (0,1)
-    k= 1.5
+    k= 1.1
+
     latGridVal= (latArr[pointB[0],pointB[1]] - latArr[pointA[0],pointA[1]])*k
     lonGridVal = (lonArr[pointB[0], pointB[1]] - lonArr[pointA[0], pointA[1]]) * k
+
     mayBePointsByLat= getXYsetCloseToPoint(latGridVal,latArr,lat)
+    print("may be lat=", len(mayBePointsByLat))
     mayBePointsByLon = getXYsetCloseToPoint(lonGridVal, lonArr, lon)
-
+    print("may be lon=", len(mayBePointsByLon))
     mayBeClosePoints= mayBePointsByLat & mayBePointsByLon
-    print("may be=", len(mayBeClosePoints))
-    print("77")
-    mayBeClosePoints= RemoveNotInBorder(mayBeClosePoints,latmin,lonmin, latMax,lonMax)
-    print ("may be=", len(mayBeClosePoints))
+    print("may be close=", len(mayBeClosePoints))
 
-    return mayBeClosePoints
+    mayBeClosePoints= RemoveNotInBorder(mayBeClosePoints,latmin,lonmin, latMax,lonMax)
+
+
+    return mayBeClosePoints.pop()
 def getXYsetCloseToPoint(rangeVal,values,myvalue):
     xySet= set()
     for i in range (len(values)):
        # for j in range (len(values[i]-2)):
         for j in range(81 ):
-            if values[i,j] > myvalue -rangeVal or values[i,j] < myvalue + rangeVal:              
+            mmin=myvalue -rangeVal
+            mplus=myvalue + rangeVal
+            if values[i,j] > myvalue -rangeVal and values[i,j] < myvalue + rangeVal:
                 xySet.add((i,j))
     return xySet 
 

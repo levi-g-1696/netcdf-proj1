@@ -38,7 +38,7 @@ lonArr = nc.variables['lon'][:]
 
 print ("lat 5,10", latArr[5,10] )
 ts2=datetime.timestamp(datetime.now())
-x= getClosestGridPoint(60.5,41.7,nc,56,40,62,44)
+x= getClosestGridPoint(60.5,41.9,nc,56,40,62,44)
 ts3=datetime.timestamp(datetime.now())
 print ("x=",x)
 print (" netcdf file opening time =",ts2-ts1 )
