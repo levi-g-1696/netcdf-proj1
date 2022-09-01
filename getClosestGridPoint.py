@@ -1,3 +1,4 @@
+from datetime import datetime
 
 
 def getClosestGridPoint(lat,lon, netcdfDataset,latmin,lonmin,latMax,lonMax):
@@ -7,32 +8,48 @@ def getClosestGridPoint(lat,lon, netcdfDataset,latmin,lonmin,latMax,lonMax):
     lonArr = nc.variables['lon'][:]
     pointA= (0,0)
     pointB= (0,1)
-    k= 1.1
+    k= 1.2
 
     latGridVal= (latArr[pointB[0],pointB[1]] - latArr[pointA[0],pointA[1]])*k
     lonGridVal = (lonArr[pointB[0], pointB[1]] - lonArr[pointA[0], pointA[1]]) * k
-
-    mayBePointsByLat= getXYsetCloseToPoint(latGridVal,latArr,lat)
-    print("may be lat=", len(mayBePointsByLat))
-    mayBePointsByLon = getXYsetCloseToPoint(lonGridVal, lonArr, lon)
-    print("may be lon=", len(mayBePointsByLon))
+    printTime("p1")
+    mayBePointsByLat= getXYsetCloseToPointV2(latGridVal,latArr,lat)
+    printTime("p2")
+    mayBePointsByLon = getXYsetCloseToPointV2(lonGridVal, lonArr, lon)
+    printTime("p3")
     mayBeClosePoints= mayBePointsByLat & mayBePointsByLon
+    printTime("p4")
     print("may be close=", len(mayBeClosePoints))
 
     mayBeClosePoints= RemoveNotInBorder(mayBeClosePoints,latmin,lonmin, latMax,lonMax)
 
 
-    return mayBeClosePoints.pop()
+    return mayBeClosePoints
 def getXYsetCloseToPoint(rangeVal,values,myvalue):
     xySet= set()
+
     for i in range (len(values)):
        # for j in range (len(values[i]-2)):
-        for j in range(81 ):
+
+        for j in range(len(values[0]) ):
             mmin=myvalue -rangeVal
             mplus=myvalue + rangeVal
-            if values[i,j] > myvalue -rangeVal and values[i,j] < myvalue + rangeVal:
+            if values[i,j] > myvalue - rangeVal and values[i,j] < myvalue + rangeVal:
                 xySet.add((i,j))
     return xySet 
+
+def getXYsetCloseToPointV2(rangeVal,values,myvalue): #Fast but not good for all cases
+    xySet= set()
+
+    for i in range (len(values)):
+       # for j in range (len(values[i]-2)):
+       if abs(values[i,0]- myvalue) < 35 : #rough check
+
+         for j in range(81 ):
+
+            if values[i,j] > myvalue -rangeVal and values[i,j] < myvalue + rangeVal:
+                xySet.add((i,j))
+    return xySet
 
 def RemoveNotInBorder(mayBeClosePoints,latmin,lonmin, latMax,lonMax):
     xySet = set()
@@ -52,3 +69,6 @@ def lonValueByIndx(point):
 
     lonArr = nc.variables['lon'][:]
     return lonArr[point[0], point[1]]
+def printTime(txt):
+    ts2 = datetime.timestamp(datetime.now())
+    print(txt,"  time =",  ts2)
