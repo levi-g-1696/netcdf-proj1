@@ -12,7 +12,7 @@ dt = datetime.now()
 # getting the timestamp
 
 ts1 = datetime.timestamp(datetime.now())
-nc_file = r'.\assets\ascat_20220816_081200_metopc_19582_eps_o_coa_3203_ovw.l2.nc'
+nc_file = r'../assets/ascat_20220816_081200_metopc_19582_eps_o_coa_3203_ovw.l2.nc'
 lat=3.971
 lon= 191.706
 print( "lat,lon= ",lat,lon)
@@ -32,6 +32,7 @@ ts2=datetime.timestamp(datetime.now())
 res= get_index_by_location(lat,lon, latArr,lonArr)
 ts3=datetime.timestamp(datetime.now())
 print( "index = ",res)
+print (latArr)
 #print ("wind dir =",wind_dir[res[0],res[1]],"  ; wind speed = " ,ws[res[0],res[1]])
 print  ("lat=",latArr[res[0],res[1]],"  :  " ,"lon=", lonArr[res[0],res[1]])
 
