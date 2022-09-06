@@ -5,7 +5,7 @@ from datetime import datetime
 from multiprocessing import Lock
 import numpy as np
 resultSet = set()
-def getXYsetInBorder(border,latArr,lonArr,x1,x2):
+def makeXYsetInBorder(border, latArr, lonArr, x1, x2):
   #  print ( "process ",x1,x2,"  time: ",time.perf_counter())
     latArr= np.array(latArr)
     lonArr= np.array(lonArr)
@@ -25,8 +25,12 @@ def getXYsetInBorder(border,latArr,lonArr,x1,x2):
     #ts3=datetime.timestamp(datetime.now())
  #@   print ("process time-",x1,"-",x2, "  =", time.process_time())
     return
-def getSetResult():
+
+
+def getResultSet():
     global resultSet
     return resultSet
+
+
 
 

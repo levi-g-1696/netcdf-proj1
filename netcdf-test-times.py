@@ -1,7 +1,7 @@
 import netCDF4
 import time
 from datetime import datetime
-from getXYsetInBorder import getXYsetInBorder, getSetResult
+from makeXYsetInBorder import makeXYsetInBorder, getSetResult
 import multiprocessing
 
 if __name__ == '__main__':
@@ -28,10 +28,10 @@ if __name__ == '__main__':
 #
    border = (65,44,70,49)
    ts2= time.perf_counter()
-   p1 = multiprocessing.Process(target=getXYsetInBorder(border,latArr,lonArr,0,800))
-   p2 = multiprocessing.Process(target=getXYsetInBorder(border,latArr,lonArr,801,1600))
-   p3 = multiprocessing.Process(target=getXYsetInBorder(border,latArr,lonArr,1601,2400))
-   p4 = multiprocessing.Process(target=getXYsetInBorder(border,latArr,lonArr,2401,3200))
+   p1 = multiprocessing.Process(target=makeXYsetInBorder(border, latArr, lonArr, 0, 800))
+   p2 = multiprocessing.Process(target=makeXYsetInBorder(border, latArr, lonArr, 801, 1600))
+   p3 = multiprocessing.Process(target=makeXYsetInBorder(border, latArr, lonArr, 1601, 2400))
+   p4 = multiprocessing.Process(target=makeXYsetInBorder(border, latArr, lonArr, 2401, 3200))
    print ("p1 start time:",time.perf_counter())
    p1.start()
    print ("p2 start time:",time.perf_counter())
@@ -66,7 +66,7 @@ if __name__ == '__main__':
    print (" set find time multiprocess x4 =",ts3-ts2 )
 
    ts4= time.perf_counter()
-   p= getXYsetInBorder(border,latArr,lonArr,0,len(latArr))
+   p= makeXYsetInBorder(border, latArr, lonArr, 0, len(latArr))
    ts5= time.perf_counter()
    res= getSetResult()
    print (res)
