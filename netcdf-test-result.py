@@ -13,5 +13,5 @@ if __name__ == '__main__':
    nc_file = r'.\assets\ascat_20220816_081200_metopc_19582_eps_o_coa_3203_ovw.l2.nc'
    border = (62,45,67,49)
 
-   print (" >> run  netcdfToJson1prop")
+   print (" ### runing  netcdfToJson1prop")
    netcdfToJson1prop(nc_file,r"D:\py-input-output\testGeojson.json",border,'wind_dir')  #netcdfFilePath,jsonFilePath,border,property

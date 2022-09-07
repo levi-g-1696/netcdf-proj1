@@ -6,7 +6,15 @@ from multiprocessing import Lock
 import numpy as np
 resultSet = set()
 def makeXYsetInBorder(border, latArr, lonArr, x1, x2):
-  #  print ( "process ",x1,x2,"  time: ",time.perf_counter())
+    # function: makes set of netcdf file indexes that fits the conditions of border
+    # arguments:
+    #  border: tuple (latidude_min, longitude_min, latitude_max,longitude_max)
+    #  latArr latitude 2D-list extracted from netcdf file
+    #  lonArr longitude 2D-list extracted from netcdf file
+    #  x1 x2 integers, first and last rows indexes in latArr and lonArr for search
+    # result: set on global variable resultSet ( does not returns any value)
+    # the result may read by  getResultSet()
+
     latArr= np.array(latArr)
     lonArr= np.array(lonArr)
     global resultSet

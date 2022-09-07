@@ -21,6 +21,7 @@ if __name__ == '__main__':
    latArr = nc.variables['lat'][:]
    lonArr = nc.variables['lon'][:]
 
+
 #
 # print( "index = ",res)
 # #print ("wind dir =",wind_dir[res[0],res[1]],"  ; wind speed = " ,ws[res[0],res[1]])

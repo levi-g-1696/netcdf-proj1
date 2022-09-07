@@ -2,6 +2,19 @@ import csv
 import json
 from collections import OrderedDict
 def outputDataToGJson(pointSet,latArr,lonArr,propNames,propValueArrs,filePath):
+
+#   updated from source https://stackoverflow.com/questions/48586647/python-script-to-convert-csv-to-geojson
+#    function: write set of points to geojson file
+#    args:
+#       pointSet: set of tuples (x,y) indexes in latArr,lonArr fit to border condition
+#       latArr,lonArr : numpy.ndarray, latitude and longitude vals  extracted from netcdf file
+#       propNames:  list of strings , property name , like this ['wind_dir'], only property[0] will be inputed
+#       propValueArrs: list of arrays numpy.ndarray, every element of the list is array of property value for
+#                       appropriate point. only option of 1 property is implemented in this version. only propValueArrs[0]
+#                       will be imputed
+#       filePath:  string, full json file path for output, will be overwriten if exist
+#    result: geojson file at filePath
+  if argsValidation():
     li = []
     propName= propNames[0]
     values= propValueArrs[0]
@@ -32,4 +45,5 @@ def outputDataToGJson(pointSet,latArr,lonArr,propNames,propValueArrs,filePath):
     f.write(json.dumps(d, sort_keys=False, indent=4))
     f.close()
     return
+def argsValidation(): return True
 
