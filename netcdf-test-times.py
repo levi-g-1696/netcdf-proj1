@@ -1,7 +1,7 @@
 import netCDF4
 import time
 from datetime import datetime
-from makeXYsetInBorder import makeXYsetInBorder, getSetResult
+from makeXYsetInBorder import makeXYsetInBorder, getResultSet
 import multiprocessing
 
 if __name__ == '__main__':
@@ -55,22 +55,16 @@ if __name__ == '__main__':
    print ("p4 join time:",time.perf_counter())
    ts3 = time.perf_counter()
 
-
-
-
-#  def getClosestGridPoint(lat,lon, netcdfDataset,latmin,lonmin,latMax,lonMax):
-#x= getClosestGridPoint(60.2,35.1,nc,56,34,62,39)
-
-
    print (" netcdf file opening time =",ts2-ts1 )
-   print (" set find time multiprocess x4 =",ts3-ts2 )
+   print (" border indexes set was found by multiprocess x4 for: ",ts3-ts2 ,"sec")
 
    ts4= time.perf_counter()
    p= makeXYsetInBorder(border, latArr, lonArr, 0, len(latArr))
    ts5= time.perf_counter()
-   res= getSetResult()
+   res= getResultSet()
    print (res)
+   print ("border indexes set was found by 1 process for:",ts5-ts4,"sec")
+###############
 
-   print (" set find time with 1 process=",ts5-ts4)
 
 
