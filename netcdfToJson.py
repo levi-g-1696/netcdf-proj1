@@ -1,11 +1,14 @@
 import netCDF4
 from datetime import datetime
+
+from makeDF import makeDF
 from makeXYsetInBorder import makeXYsetInBorder, getResultSet
 import numpy as np
+import pandas as pd
 
 from output import outputDataToGJson
 
-def netcdfToJson1prop(netcdfFilePath,jsonFilePath,border,property):
+def netcdfToJson1prop(netcdfFilePath,jsonFilePath,border,property,csv,json):
     # function : makes GeoJson file from netcdf file data according the border for 1 physical property
     #            (pilot version). it is a wrap for makeXYsetInBorder() getResultSet() outputDataToGJson() .
     #  arguments:
@@ -27,6 +30,9 @@ def netcdfToJson1prop(netcdfFilePath,jsonFilePath,border,property):
 
      makeXYsetInBorder(border, latArr, lonArr, 0, len(latArr))
      myset=  getResultSet()
+     resultDataFrame= makeDF(myset, nc.variables,property)
+     if csv :  resultDataFrame.to_csv(jsonFilePath +".csv")
+     if json:
 
      print (myset)
      outputDataToGJson (myset, latArr, lonArr, [property], [propVals],jsonFilePath)
