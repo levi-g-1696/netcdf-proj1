@@ -14,4 +14,4 @@ if __name__ == '__main__':
    border = (62,45,67,49)
 
    print (" ### runing  netcdfToJson1prop")
-   netcdfToJson1prop(nc_file,r"D:\py-input-output\testGeojson.json",border,'wind_dir')  #netcdfFilePath,jsonFilePath,border,property
+   netcdfToJson1prop(nc_file,r"D:\py-input-output\testGeojson.json",border,'wind_dir', csv= False, json= True)  #netcdfFilePath,jsonFilePath,border,property

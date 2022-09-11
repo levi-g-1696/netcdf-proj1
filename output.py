@@ -48,28 +48,48 @@ def outputDataToGJson(pointSet,latArr,lonArr,propNames,propValueArrs,filePath):
 ###################################################################################################
 
 
-    def outputDataToGJson_V2(dataFrame,outfile ):
-        in_file = 'data.json'
-        out_file = outfile + '.json'
-
-        data = json.load(open(in_file))
-
-        geojson = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [d["lon:"], d["lat:"]],
-                    },
-                    "properties": d,
-                } for d in dataFrame]
-        }
-
-        output = open(out_file, 'w')
-        json.dump(geojson, output)
-
-    return
+    # def outputDataToGJson_V2(dataFrame,outfile ):
+    #     in_file = 'data.json'
+    #     out_file = outfile + '.json'
+    #
+    #     data = json.load(open(in_file))
+    #
+    #     geojson = {
+    #         "type": "FeatureCollection",
+    #         "features": [
+    #             {
+    #                 "type": "Feature",
+    #                 "geometry": {
+    #                     "type": "Point",
+    #                     "coordinates": [d["lon:"], d["lat:"]],
+    #                 },
+    #                 "properties": d,
+    #             } for d in dataFrame]
+    #     }
+    #
+    #     output = open(out_file, 'w')
+    #     json.dump(geojson, output)
+    #
+    # return
 def argsValidation(): return True
 
+
+def outputDataToGJson_V2(dataFrame,outfile ):
+
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [d["lon:"], d["lat:"]],
+                },
+                "properties": d,
+            } for d in dataFrame]
+    }
+
+    output = open(outfile, 'w')
+    json.dump(geojson, output)
+
+    return
