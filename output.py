@@ -50,27 +50,15 @@ def outputDataToGJson(pointSet,latArr,lonArr,propNames,propValueArrs,filePath):
 def argsValidation(): return True
 
 
-def outputDataToGJson_V2(dataFrame,outfile ):
 
-    geojson = {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [d["lon:"], d["lat:"]],
-                },
-                "properties": d,
-            } for d in dataFrame]
-    }
-
-    output = open(outfile, 'w')
-    json.dump(geojson, output)
-
-    return
 
 def outputDataToGJson_V3(dataFrame,outfile ):
+    #    function: write pandas dataframe to geojson file
+    #    args:
+    #       dataframe: pandas dataframe fit to border condition
+    #
+    #       outfile:  string, full json file path for output, will be overwriten if exist
+    #    result: geojson file
     j1= dataFrame.to_json(orient="records")
     jObj= json.loads(j1)
 
