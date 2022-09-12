@@ -6,7 +6,7 @@ from makeXYsetInBorder import makeXYsetInBorder, getResultSet
 import numpy as np
 import pandas as pd
 
-from output import outputDataToGJson,outputDataToGJson_V2
+from output import outputDataToGJson,outputDataToGJson_V3
 
 def netcdfToJson1prop(netcdfFilePath,jsonFilePath,border,property,csv,json):
     # function : makes GeoJson file from netcdf file data according the border for 1 physical property
@@ -33,7 +33,7 @@ def netcdfToJson1prop(netcdfFilePath,jsonFilePath,border,property,csv,json):
      resultDataFrame= getDF(myset, nc.variables, ['wind_speed', 'wind_dir', 'bs_distance'])
      print (resultDataFrame)
      if csv :  resultDataFrame.to_csv(jsonFilePath +".csv")
-     if json: outputDataToGJson_V2(resultDataFrame,jsonFilePath +".json")
+     if json: outputDataToGJson_V3(resultDataFrame,jsonFilePath +".json")
 
      print (myset)
 
